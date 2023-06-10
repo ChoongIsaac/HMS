@@ -50,6 +50,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 </head>
+<?php 
+header("X-Frame-Options: SAMEORIGIN");
+?>
 <body>
 	<!-- banner -->
 		<div class="banner" id="home">

@@ -24,12 +24,38 @@
 </head>
 
 
+<?php
+
+header("X-Frame-Options: SAMEORIGIN");
+
+session_start();
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$token = $_SESSION['csrf_token'];
+if (isset($_POST['login-submit'])) {
+
+    if (isset($_POST['csrf_token'])) {
+        $csrf_token = $_POST['csrf_token'];
+
+        // Check if the submitted token matches the one stored in $_SESSION.
+        if ($csrf_token === $_SESSION['csrf_token']) {
+            echo 'Token valid. Updating your data.<br>';
+        } else {
+            echo 'Token invalid. Operation not allowed.<br>';
+        }
+    } else {
+        echo 'CSRF token not found in the request.<br>';
+    }
+}
+?>
+
 <body>
     <h1>Hostel Room Allocation System</h1>
     <div class=" w3l-login-form">
         <h2>Student Login</h2>
         <form action="includes/login.inc.php" method="POST">
-
+        <input type="hidden" name="csrf_token" value=<?= htmlentities($token, ENT_QUOTES | ENT_HTML5, "UTF-8")?>/>
             <div class=" w3l-form-group">
                 <label>Student Roll No:</label>
                 <div class="group">

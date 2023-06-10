@@ -38,7 +38,9 @@
 	<!-- //web-fonts -->
 	
 </head>
-
+<?php 
+header("X-Frame-Options: SAMEORIGIN");
+?>
 <body>
 
 <!-- banner -->
