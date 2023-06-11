@@ -52,6 +52,8 @@ if (isset($_POST['signup-submit'])) {
 
           mysqli_stmt_bind_param($stmt, "sssssss",$roll, $fname, $lname, $mobile, $dept, $year, $hashedPwd);
           mysqli_stmt_execute($stmt);
+          mysqli_stmt_close($stmt);
+          mysqli_close($conn);
           header("Location: ../index.php?signup=success");
           exit();
         }
@@ -59,8 +61,8 @@ if (isset($_POST['signup-submit'])) {
     }
 
   }
-  mysqli_stmt_close($stmt);
-  mysqli_close($conn);
+  
+ 
 
 }
 else {

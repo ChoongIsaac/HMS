@@ -108,10 +108,10 @@ header("X-Frame-Options: SAMEORIGIN");
 								<input type="text" name="hostel_name" placeholder="Hostel Name" required="">
 							</div>
 							<div class="contact-fields-w3ls">
-								<input type="text" name="name" placeholder="Name" value="<?php echo $_SESSION['fname']." ".$_SESSION['lname']; ?>" required="">
+								<input type="text" name="name" placeholder="Name" value="<?php echo $_SESSION['fname']." ".$_SESSION['lname']; ?>" required="" disabled="disabled">
 							</div>
 							<div class="contact-fields-w3ls">
-								<input type="text" name="rol_no" placeholder="Roll Number" value="<?php echo $_SESSION['roll']; ?>" required="">
+								<input type="text" name="rol_no" placeholder="Roll Number" value="<?php echo $_SESSION['roll']; ?>" required="" disabled="disabled">
 							</div>
 							<div class="contact-fields-w3ls">
 								<input type="text" name="subject" placeholder="Subject" required="">
@@ -229,7 +229,7 @@ if(isset($_POST['submit'])){
     $today_date =  date("Y-m-d");
     $time = date("h:i A");
 
-	$query = "INSERT INTO Message (sender_id,receiver_id,hostel_id,subject_h,message,msg_date,msg_time) VALUES ('$roll','$hos_man_id','$hostel_id','$subject','$message','$today_date','$time')";
+	$query = "INSERT INTO Message (sender_id,receiver_id,hostel_id,subject_h,message,msg_date,msg_time) VALUES ('$roll','$hos_man_user','$hostel_id','$subject','$message','$today_date','$time')";
     $result = mysqli_query($conn,$query);
     if($result){
          echo "<script type='text/javascript'>alert('Message sent Successfully!')</script>";
