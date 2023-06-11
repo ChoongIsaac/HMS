@@ -1,6 +1,6 @@
 <?php
   session_start();
-  $servername = "hms.test"; //change this  accordingly
+  $servername = "hms.local"; //change this  accordingly
   $dBUsername = "root";
   $dBPassword = "";
   $dBName = "hostel_management_system";
