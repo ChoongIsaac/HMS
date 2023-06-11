@@ -13,7 +13,8 @@
 	if ($session_life > $inactive) {
 		session_unset();
 		session_destroy();
-		header("Location: index.php"); // Redirect to login page
+		header("Location: index.php?session=expired"); // Redirect to login page
+
 		exit();
 	}	
 	
