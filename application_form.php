@@ -21,6 +21,8 @@ require 'includes/config.inc.php';
 		function hideURLbar() {
 			window.scrollTo(0, 1);
 		}
+
+	
 	</script>
 	<!--// Meta tag Keywords -->
 
@@ -117,7 +119,7 @@ header("X-Frame-Options: SAMEORIGIN");
 							<input type="text" name="hostel" placeholder="Hostel" value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>" required="" disabled="disabled">
 							</div>
 							<div class="contact-fields-w3ls">
-								<input type="password" name="pwd" placeholder="Password" required="">
+								<input type="password" name="pwd" id="password" placeholder="Password" required="">
 							</div>
 						</div>
 						<div class="col-md-6 contact_left_grid" data-aos="fade-left">
@@ -229,7 +231,6 @@ function sanitizeInput($input)
 	$input = htmlspecialchars($input);
 	return $input;
 }
-
 if (isset($_POST['submit'])) {
 	$roll = sanitizeInput($_SESSION['roll']);
 	$password = sanitizeInput($_POST['pwd']);
@@ -239,8 +240,6 @@ if (isset($_POST['submit'])) {
 	// For example, you can check if the roll number is in a specific format
 	if (!preg_match('/^[A-Za-z0-9]+$/', $roll)) {
 		echo "<script type='text/javascript'>alert('Invalid Roll Number!')</script>";
-	} elseif (strlen($password) < 8) {
-		echo "<script type='text/javascript'>alert('Password must be at least 8 characters long!')</script>";
 	} else {
 		// Input validation passed, proceed with further logic
 

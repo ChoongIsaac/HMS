@@ -34,7 +34,7 @@
             var confirmPassword = document.forms["signupForm"]["confirmpwd"].value;
 
             // Validate data types
-            if (typeof rollNo !== "string" || !/^[A-Za-z0-9]+$/.test(rollNo)) {
+            if (!/^[A-Za-z0-9]+$/.test(rollNo)) {
                 alert("Student Roll No should be a valid alphanumeric string.");
                 return false;
             }
@@ -70,7 +70,20 @@
                 return false;
             }
 
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
 
+            // Password should contain at least one lowercase letter, one uppercase letter, one digit, and one special character
+            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
+
+        if (!passwordRegex.test(password)) {
+            alert("Password must contain at least 8 characters, including at least one lowercase letter, one uppercase letter, one digit, and one special character.");
+            return false;
+        }
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
 
             // All data types are valid, form can be submitted
             return true;
@@ -99,6 +112,19 @@ if (isset($_POST['signup-submit'])) {
         }
     } else {
         echo 'CSRF token not found in the request.<br>';
+    }
+}
+
+if (isset($_POST['signup-submit'])) {
+    // Retrieve the password from the form submission
+    $password = $_POST['pwd'];
+
+    // Password should contain at least one lowercase letter, one uppercase letter, one digit, and one special character
+    $passwordRegex = "/^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/";
+
+    if (!preg_match($passwordRegex, $password)) {
+        echo 'Password must contain at least 8 characters, including at least one lowercase letter, one uppercase letter, one digit, and one special character.';
+        exit;
     }
 }
 ?>
@@ -170,7 +196,7 @@ if (isset($_POST['signup-submit'])) {
                 <label>Password:</label>
                 <div class="group">
                     <i class="fas fa-unlock"></i>
-                    <input type="password" class="form-control" name="pwd" placeholder="Password" required="required" />
+                    <input type="password" class="form-control" name="pwd" id="password" placeholder="Password" required="required" />
                 </div>
             </div>
 
@@ -178,7 +204,7 @@ if (isset($_POST['signup-submit'])) {
                 <label>Confirm Password:</label>
                 <div class="group">
                     <i class="fas fa-unlock"></i>
-                    <input type="password" class="form-control" name="confirmpwd" placeholder="Confirm Password"
+                    <input type="password" class="form-control" name="confirmpwd" id="confirmPassword" placeholder="Confirm Password"
                         required="required" />
                 </div>
             </div>

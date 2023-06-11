@@ -105,7 +105,7 @@ header("X-Frame-Options: SAMEORIGIN");
 					<div class="row">
 						<div class="col-md-6 contact_left_grid" data-aos="fade-right">
 							<div class="contact-fields-w3ls">
-								<input type="text" name="hostel_name" placeholder="Hostel Name" required="">
+								<input type="text" name="hostel_name" placeholder="Hostel Name" pattern="[A-F]{1}" title="Please enter a valid hostel name (A, B, C, D, E, or F)" required="">
 							</div>
 							<div class="contact-fields-w3ls">
 								<input type="text" name="name" placeholder="Name" value="<?php echo $_SESSION['fname']." ".$_SESSION['lname']; ?>" required="" disabled="disabled">
@@ -209,7 +209,13 @@ header("X-Frame-Options: SAMEORIGIN");
 
 <?php
 if(isset($_POST['submit'])){
-	/*echo "<script type='text/javascript'>alert('hello')</script>";*/
+
+	// Retrieve the hostel name from the form submission
+	$hostel_name = $_POST['hostel_name'];
+
+	// Validate the hostel name
+	if(preg_match('/^[A-F]{1}$/', $hostel_name)){
+		/*echo "<script type='text/javascript'>alert('hello')</script>";*/
 	$subject = $_POST['subject'];
 	$message = $_POST['message'];
 	$hostel_name = $_POST['hostel_name'];
@@ -237,6 +243,11 @@ if(isset($_POST['submit'])){
     else{
          echo "<script type='text/javascript'>alert('Error in sending message!!! Please try again.')</script>";
    }
+	} else {
+		// Hostel name is invalid, display an error message
+		echo "<script type='text/javascript'>alert('Please enter a valid hostel name (A, B, C, D, E, or F)')</script>";
+	}
+	
   }
 
 
