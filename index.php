@@ -53,6 +53,15 @@ if (isset($_POST['login-submit'])) {
 <body>
     <h1>Hostel Room Allocation System</h1>
     <div class=" w3l-login-form">
+		<?php
+		if (isset($_GET['session']) && $_GET['session'] == 'expired') {
+		?>
+		<div style="background-color: #f8f5d7;color: #fc3955;padding: 10px;margin: 10px 0;border: 1px solid #f8f5d7;border-radius: 5px;">
+		  Your session has expired. Please log in again.
+		</div>
+		<?php
+		}
+		?>
         <h2>Student Login</h2>
         <form action="includes/login.inc.php" method="POST">
             <input type="hidden" name="csrf_token" value=<?= htmlentities($token, ENT_QUOTES | ENT_HTML5, "UTF-8") ?> />
